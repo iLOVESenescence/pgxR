@@ -69,7 +69,7 @@ plot_drc <- function(agg_data, pred_data, title = "",
 #'
 #' @examples
 #' \dontrun{
-#' p <- plot_drc_anc(agg, preds, title = "Melphalan by Ancestry")
+#' p <- plot_drc_anc(agg, preds, title = "Drug Response by Ancestry")
 #' }
 plot_drc_anc <- function(agg_data,
                          pred_data,
