@@ -23,3 +23,8 @@ Imports:
     stats,
     utils,
     ggpubr
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: knitr

@@ -82,7 +82,7 @@ drc_theme <- function(base_size        = 12,
 #' Helpfer function for users whose data uses full pop names rather than standard abbrevs. 
 #' Unrecognized labels are passed through unchanged with a warning.
 #' 
-#' @param name Character vectors of ancestry label
+#' @param x Character vectors of ancestry label
 #' 
 #' @return Character vector with standardized abbreviations
 #' @export
@@ -138,3 +138,10 @@ validate_columns <- function(data, required, arg_name = "data") {
     )
   }
 }
+
+utils::globalVariables(c(
+  "cell_line", "dose", "response", "ancestry", "feature",
+  "mean_response", "sd", "predicted_response",
+  "Estimate", "Lower", "Upper", "AUC", "hill_slope",
+  ".data", "reorder"
+))

@@ -63,11 +63,11 @@ extract_all <- function(fits, agg_data) {
 #' defined even when curves do not reach 50% inhibition.
 #'
 #' A higher AUC indicates greater drug sensitivity. AUC is normalized to
-#' [0, 1] by default by dividing by the total log-dose range.
+#' \[0, 1\] by default by dividing by the total log-dose range.
 #'
 #' @param pred_data Prediction data frame from [predict_drc()].
 #' @param normalize Logical. If `TRUE` (default), AUC is divided by the total
-#'   log10 dose range so values fall in [0, 1].
+#'   log10 dose range so values fall in \[0, 1\].
 #'
 #' @return A data frame with columns `cell_line`, `ancestry`, `feature`,
 #'   and `AUC`.

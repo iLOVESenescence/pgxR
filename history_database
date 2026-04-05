@@ -454,3 +454,21 @@
 1775425347184:usethis::use_r("stats")
 1775425661071:devtools::load_all()
 1775425835946:file.remove("R/DRC_MASTER.R")
+1775425960127:devtools::load_all()
+1775425976417:devtools::document()
+1775426016921:devtools::check()
+1775426090018:install.packages("testthat")
+1775426095051:install.packages("testthat")
+1775426143507:usethis::use_vignette("getting_started")
+1775426158907:usethis::use_package("testthat", type = "Suggests")
+1775426176793:usethis::use_build_ignore(c(
+1775426176793:"addin_registry", "client-state", "history_database",
+1775426176793:"log", "monitored", "notebooks", "pcs", "persistent-state",
+1775426176793:"projects", "projects_settings", "rstudio-server.json",
+1775426176793:"saved_source_markers", "sessions", "sources"
+1775426176793:))
+1775426378907:usethis::use_vignette("getting_started")
+1775426387666:usethis::use_package("testthat", type = "Suggests")
+1775426403116:devtools::check()
+1775426461768:usethis::use_test("metrics")
+1775426668136:devtools::check()

@@ -109,3 +109,68 @@ The most similar command is
 ]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ file.remoc[Kve("R/DRC_MASTER.R")
 [?2004lbash: syntax error near unexpected token `"R/DRC_MASTER.R"'
 ]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ file.remove("R/DRC_MASTER.R")[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kgit co[K[Kadd -A
+[?2004l]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit-m "removed old DRC script template, split everything into sep files"
+[?2004lgit: 'commit-m' is not a git command. See 'git --help'.
+
+The most similar command is
+	commit-tree
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit-m "removed old DRC script template, split everything into sep files"[1@ 
+[?2004l[main 57231d0] removed old DRC script template, split everything into sep files
+ 58 files changed, 931 insertions(+), 286 deletions(-)
+ delete mode 100644 R/DRC_MASTER.R
+ create mode 100644 addin_registry
+ create mode 100644 client-state/environment-grid.persistent
+ create mode 100644 client-state/source-column-manager.persistent
+ create mode 100644 client-state/themes.persistent
+ create mode 100644 client-state/workbenchp.persistent
+ create mode 100644 history_database
+ create mode 100644 log/rsession-lia.hooker.log
+ create mode 100644 monitored/lists/command_palette_mru
+ create mode 100644 monitored/lists/file_mru
+ create mode 100644 monitored/lists/help_history_links
+ create mode 100644 monitored/lists/plot_publish_mru
+ create mode 100644 monitored/lists/project_mru
+ create mode 100644 monitored/lists/project_name_mru
+ create mode 100644 monitored/lists/user_dictionary
+ create mode 100644 notebooks/patch-chunk-names
+ create mode 100644 pcs/files-pane.pper
+ create mode 100644 pcs/source-pane.pper
+ create mode 100644 pcs/windowlayoutstate.pper
+ create mode 100644 pcs/workbench-pane.pper
+ create mode 100644 persistent-state
+ create mode 100644 pgxR.Rproj
+ create mode 100644 projects/9af7ac60/console07/AE650472
+ create mode 100644 projects/9af7ac60/console07/INDEX001
+ create mode 100644 projects/none/console07/INDEX001
+ create mode 100644 projects_settings/last-project-path
+ create mode 100644 projects_settings/project-id-mappings
+ create mode 100644 projects_settings/switch-to-project
+ create mode 100644 projects_settings/update-pkg-install-default
+ create mode 100644 rstudio-server.json
+ create mode 100644 saved_source_markers
+ create mode 100644 sessions/active/session-8db23923/properites/activity_state
+ create mode 100644 sessions/active/session-8db23923/properites/blocking_suspend
+ create mode 100644 sessions/active/session-8db23923/properites/created
+ create mode 100644 sessions/active/session-8db23923/properites/editor
+ create mode 100644 sessions/active/session-8db23923/properites/executing
+ create mode 100644 sessions/active/session-8db23923/properites/initial
+ create mode 100644 sessions/active/session-8db23923/properites/label
+ create mode 100644 sessions/active/session-8db23923/properites/last-used
+ create mode 100644 sessions/active/session-8db23923/properites/last_resumed
+ create mode 100644 sessions/active/session-8db23923/properites/last_state_updated
+ create mode 100644 sessions/active/session-8db23923/properites/launch-parameters
+ create mode 100644 sessions/active/session-8db23923/properites/project
+ create mode 100644 sessions/active/session-8db23923/properites/r-version
+ create mode 100644 sessions/active/session-8db23923/properites/r-version-home
+ create mode 100644 sessions/active/session-8db23923/properites/r-version-label
+ create mode 100644 sessions/active/session-8db23923/properites/running
+ create mode 100644 sessions/active/session-8db23923/properites/save_prompt_required
+ create mode 100644 sessions/active/session-8db23923/properites/suspend_timestamp
+ create mode 100644 sessions/active/session-8db23923/properites/working-dir
+ create mode 100644 sessions/active/session-8db23923/rmd-outputs
+ create mode 100644 sessions/active/session-8db23923/session-persistent-state
+ create mode 100644 sources/per/t/EC191A0A
+ create mode 100644 sources/per/t/EC191A0A-contents
+ create mode 100644 sources/prop/7C303952
+ create mode 100644 sources/prop/INDEX
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ [K[lia.hooker@compute109 pgxR]$ git add -A
