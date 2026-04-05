@@ -1,0 +1,24 @@
+Package: pgxR
+Title: Pharmacogenomics Dose-Response Analysis with Population Context
+Version: 0.0.0.9000
+Authors@R: person("Qualia", "Hooker", role = c("aut", "cre"), email = "lia.hooker@vai.edu")
+Description: A toolkit for fitting, visualizing, and comparing
+    dose-response curves across cancer cell lines. Provides functions for
+    IC50/AUC extraction, population-stratified visualization by ancestry
+    and genomic feature status as well as downstream correlation with
+    omics data.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Depends:
+    R (>= 4.1.0)
+Imports:
+    drc,
+    dplyr,
+    tidyr,
+    purrr,
+    ggplot2,
+    ggrepel,
+    stats,
+    utils

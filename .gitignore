@@ -1,6 +1,6 @@
-*.csv
-*.rds
-*.RData
-*.Rhistory
-*.Rproj.user/
+.Rproj.user
+.Rhistory
+.RData
+.httr-oauth
 .DS_Store
+.quarto
