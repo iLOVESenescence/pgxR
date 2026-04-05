@@ -1,0 +1,98 @@
+---
+output: github_document
+---
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  comment   = "#>",
+  fig.path  = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# pgxR <img src="man/figures/logo.png" align="right" height="139" alt="" />
+
+<!-- badges: start -->
+[![R CMD Check](https://github.com/iLOVESenescence/pgxR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/iLOVESenescence/pgxR/actions)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+<!-- badges: end -->
+
+## Overview
+
+**pgxR** is a pharmacogenomics toolkit for fitting, visualizing, and comparing
+dose-response curves across cancer cell lines. It provides a complete workflow
+from raw viability data to publication-ready figures, with built-in support for
+population stratification by ancestry and genomic feature status.
+
+### Key features
+
+- Fit 4-parameter log-logistic dose-response models via `drc`
+- Extract IC50, AUC, and Hill slope in a single tidy table
+- Visualize curves stratified by ancestry (1KGP/HGDP superpopulations)
+- Facet by any genomic feature — translocation, driver mutation, CNV status
+- Compare sensitivity across groups with built-in ANOVA and Wilcoxon tests
+- Flexible column mapping 
+
+## Installation
+```r
+# install.packages("devtools")
+devtools::install_github("iLOVESenescence/pgxR")
+```
+
+## Quick start
+```{r quickstart, message = FALSE, warning = FALSE}
+library(pgxR)
+
+# load built-in paclitaxel example data
+data(pgxr_example)
+
+# aggregate replicates
+agg <- combine_reps(pgxr_example)
+
+# fit dose-response models
+fits <- fit_all(agg, unique(agg$cell_line))
+
+# generate smooth predictions
+preds <- predict_drc(fits, agg)
+
+# extract all metrics in one table
+metrics <- summarize_drc(fits, agg, preds)
+metrics
+```
+
+## Visualization
+```{r plot-drc, message = FALSE, warning = FALSE, fig.width = 10, fig.height = 6}
+# dose-response curves by ancestry, faceted by genomic feature
+plot_drc_anc(agg, preds, title = "Paclitaxel Response by Ancestry")
+```
+```{r plot-sensitivity, message = FALSE, warning = FALSE, fig.width = 7, fig.height = 5}
+# IC50 comparison across ancestry groups with p-values
+plot_sensitivity(metrics, group_col = "ancestry", metric = "IC50",
+                 title = "Paclitaxel IC50 by Ancestry")
+```
+
+## Handling your own data
+
+pgxR expects columns `dose`, `response`, `cell_line`, `ancestry`, and
+`feature`. If your CSV uses different names, use `col_map`:
+```r
+raw <- load_data(
+  "my_data.csv",
+  col_map = list(feature = "translocation")
+)
+
+# standardize ancestry labels to 1KGP/HGDP abbreviations
+raw$ancestry <- standardize_ancestry(as.character(raw$ancestry))
+```
+
+## Citation
+
+If you use pgxR in your research please cite:
+
+> Hooker Q (2025). pgxR: Pharmacogenomics Dose-Response Analysis with
+> Population Context. R package version 0.1.0.
+> https://github.com/iLOVESenescence/pgxR
+
+## License
+
+GPL (>= 3)
