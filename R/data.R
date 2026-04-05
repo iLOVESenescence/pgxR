@@ -16,7 +16,13 @@
 #' - `feature` — translocation or mutation status (use `"none"` if absent)
 #'
 #' @param filepath Character. Path to the input CSV file.
-#'
+#' @param col_map Named list mapping pgxR's expected column names to the 
+#' actual column names in your CSV. Only specify columns that differ.
+#' For example, if your CSV has `translocation` instead of `feature`:
+#'   `col_map = list(feature = "translocation")`.
+#'   Or if ancestry is stored as `population`:
+#'   `col_map = list(ancestry = "population", feature = "translocation")`.
+#'   
 #' @return A data frame with `dose` and `response` as numeric, and
 #'   `cell_line`, `ancestry`, `feature` as factors.
 #' @export
@@ -25,12 +31,30 @@
 #' \dontrun{
 #' raw <- load_data("drug_response_data.csv")
 #' }
-load_data <- function(filepath) {
+load_data <- function(filepath, col_map = NULL) {
   if (!file.exists(filepath)) {
     stop(sprintf("File not found: '%s'", filepath), call. = FALSE)
   }
   
   data <- utils::read.csv(filepath)
+  
+  #rename user columns to pgxR expected names
+  if (!is.null(col_map)) {
+    for (pgxr_name in names(col_map)) {
+      user_name <- col_map[[pgxr_name]]
+      if (!user_name %in% colnames(data)) {
+        stop(
+          sprintf(
+            "col_map error: column '%s' not found in data. Available columns: %s",
+            user_name,
+            paste(colnames(data), collapse = ", ")
+          ),
+          call. = FALSE
+        )
+      }
+      colnames(data)[colnames(data) == user_name] <- pgxr_name
+    }
+  }
   
   validate_columns(
     data,
@@ -55,7 +79,16 @@ load_data <- function(filepath) {
 #' deviations. This aggregated output is the expected input for all downstream
 #' fitting and plotting functions.
 #'
+#' Extra columns (e.g. replicate identifiers, experiment labels) are ignored
+#' during aggregation — only `cell_line`, `dose`, `ancestry`, `feature`, and
+#' `response` are used.
+#'
 #' @param data A data frame from [load_data()].
+#' @param replicate_col Character or `NULL`. Name of the column identifying
+#'   replicates (e.g. `"experiment"`, `"replicate"`, `"run"`). If provided,
+#'   validates the column exists before aggregating. If `NULL` (default),
+#'   replicates are collapsed implicitly across all rows sharing the same
+#'   `cell_line`, `dose`, `ancestry`, and `feature`.
 #'
 #' @return A data frame with columns `cell_line`, `dose`, `ancestry`,
 #'   `feature`, `mean_response`, `sd`, and `n` (replicate count).
@@ -63,14 +96,35 @@ load_data <- function(filepath) {
 #'
 #' @examples
 #' \dontrun{
-#' raw <- load_data("drug_response_data.csv")
+#' # implicit replicate collapsing
 #' agg <- combine_reps(raw)
+#'
+#' # explicit replicate column
+#' agg <- combine_reps(raw, replicate_col = "experiment")
 #' }
-combine_reps <- function(data) {
+combine_reps <- function(data, replicate_col = NULL) {
   validate_columns(
     data,
     c("cell_line", "dose", "ancestry", "feature", "response")
   )
+  
+  if (!is.null(replicate_col)) {
+    if (!replicate_col %in% colnames(data)) {
+      stop(
+        sprintf(
+          "replicate_col '%s' not found in data. Available columns: %s",
+          replicate_col,
+          paste(colnames(data), collapse = ", ")
+        ),
+        call. = FALSE
+      )
+    }
+    message(sprintf(
+      "Aggregating across %d replicates identified by '%s'.",
+      length(unique(data[[replicate_col]])),
+      replicate_col
+    ))
+  }
   
   data |>
     dplyr::group_by(cell_line, dose, ancestry, feature) |>
