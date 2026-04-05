@@ -1,0 +1,1 @@
+2026-04-05T18:32:04.489999Z [rsession-lia.hooker] WARNING Private command disabled, unsupported $HISTCONTROL: [ignoredups]; LOGGED FROM: bool rstudio::core::terminal::PrivateCommand::output(const string&) src/cpp/core/terminal/PrivateCommand.cpp:265

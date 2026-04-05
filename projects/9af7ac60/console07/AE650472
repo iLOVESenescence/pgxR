@@ -1,0 +1,111 @@
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git add R/theme.R
+[?2004l]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit -m "add theme.R ancestry_cols. ancestry_linetypes, drc_theme, standardize_ancestry, validate_cols"
+[?2004l[main 3507bb3] add theme.R ancestry_cols. ancestry_linetypes, drc_theme, standardize_ancestry, validate_cols
+ 1 file changed, 140 insertions(+)
+ create mode 100644 R/theme.R
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git add R/data.R
+[?2004l]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit -m "adde[K data.R- functions for loading and combing[King data with featuer[K[Kre col"
+[?2004l[main e2ea247] add data.R- functions for loading and combining data with feature col
+ 1 file changed, 84 insertions(+)
+ create mode 100644 R/data.R
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit -m "add data.R- functions for loading and combining data with feature col"[1@r[1@e[1@p[1@s[1@ [C[C[C[C[C[1@f[1@r[1@o[1@m[1@ 
+[?2004lOn branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	[31mmodified:   .Rbuildignore[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	[31maddin_registry[m
+	[31mclient-state/[m
+	[31mhistory_database[m
+	[31mlog/[m
+	[31mmonitored/[m
+	[31mnotebooks/patch-chunk-names[m
+	[31mpcs/[m
+	[31mpersistent-state[m
+	[31mpgxR.Rproj[m
+	[31mprojects/[m
+	[31mprojects_settings/[m
+	[31mrstudio-server.json[m
+	[31msaved_source_markers[m
+	[31msessions/[m
+	[31msources/[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit -m "add data.R- functions for loading and combining reps from data with feature col"[10P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cadd R/data.R[K
+[?2004l]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git add R/data.Rcommit -m "add data.R- functions for loading and combining reps from data with feature col"
+[?2004lOn branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	[31mmodified:   .Rbuildignore[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	[31maddin_registry[m
+	[31mclient-state/[m
+	[31mhistory_database[m
+	[31mlog/[m
+	[31mmonitored/[m
+	[31mnotebooks/patch-chunk-names[m
+	[31mpcs/[m
+	[31mpersistent-state[m
+	[31mpgxR.Rproj[m
+	[31mprojects/[m
+	[31mprojects_settings/[m
+	[31mrstudio-server.json[m
+	[31msaved_source_markers[m
+	[31msessions/[m
+	[31msources/[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit -m "add data.R- functions for loading and combining reps from data with feature col"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kgit commit -m "add data.R- functions for loading and combining reps from data with feature col"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cadd R/data.R[K[K[K[K[K[K[Kfitting.R
+[?2004l]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commt -m "added fitting.R- functions for fitting a single [K[K[K[K[K[K[K[K[Ksingle & multiple cell lines"
+[?2004lgit: 'commt' is not a git command. See 'git --help'.
+
+The most similar command is
+	commit
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commt -m "added fitting.R- functions for fitting single & multiple cell lines"[C[C[1@i
+[?2004l[main 2e24b1a] added fitting.R- functions for fitting single & multiple cell lines
+ 1 file changed, 65 insertions(+)
+ create mode 100644 R/fitting.R
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git add R/predict.R
+[?2004l]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit -m "added predict.R with functions for predicti[K[K[K[K[K[K[K[K[K l[Kpredict line fit"
+[?2004l[main 8c17af9] added predict.R with functions for predict line fit
+ 1 file changed, 50 insertions(+)
+ create mode 100644 R/predict.R
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit -m "added predict.R with functions for predict line fit"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cadd R/predict.R[K[1P.R[1P.R[1P.R[1P.R[1P.R[1P.R[1P.Rm.Re.Rt.Rr.Ri.Rc.Rs.R[C[C
+[?2004l]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ got [K[K[Kit commit -m "add metrics.R - ic50 functions, [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kadded ic50, auc, hill slope, a[K[K[K extraction and summary functions"
+[?2004l[main f143b65] add metrics.R - added ic50, auc, hill slope extraction and summary functions
+ 1 file changed, 190 insertions(+)
+ create mode 100644 R/metrics.R
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git add R/plot_drc.R
+[?2004l]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit -m " adde[K[K[K[K[Kadded plto[K[Kot_drc.R- added functions for plotting drc's and e[Kadjusted t[Ky lab aprams[K[K[K[K[K[Kparams and feature"
+[?2004l[main 6e44429] added plot_drc.R- added functions for plotting drc's and adjusted y lab params and feature
+ 1 file changed, 140 insertions(+)
+ create mode 100644 R/plot_drc.R
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit -m "added plot_drc.R- added functions for plotting drc's and adjusted y lab params and feature"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cadd R/plot_drc.R[K
+[?2004l]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git add R/plot_drc.Rcommit -m "added plot_drc.R- added functions for plotting drc's and adjusted y lab params and feature"
+[?2004l[main 8b529ae] added plot_drc.R- added functions for plotting drc's and adjusted y lab params and feature
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ [K[lia.hooker@compute109 pgxR]$ git add R/plot_ic50.R 
+[?2004l]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit -m "add plot_ic50[K0.R - added functions for plotting ancestry, auc, features with diff viz d[Kparmas[K[K[Kams"
+[?2004l[main 876a68d] add plot_ic50.R - added functions for plotting ancestry, auc, features with diff viz params
+ 1 file changed, 306 insertions(+)
+ create mode 100644 R/plot_ic50.R
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git add R/stats.R 
+[?2004l]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ git commit -m "add stats.R with functions for anova & post-doc tests"
+[?2004l[main e90f69a] add stats.R with functions for anova & post-doc tests
+ 1 file changed, 94 insertions(+)
+ create mode 100644 R/stats.R
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ file.remoc[Kve("R/DRC_MASTER.R")
+[?2004lbash: syntax error near unexpected token `"R/DRC_MASTER.R"'
+]0;/varidata/research/projects/triche/Lia/coding_projects/pgxR[?2004h[lia.hooker@compute109 pgxR]$ file.remove("R/DRC_MASTER.R")[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kgit co[K[Kadd -A

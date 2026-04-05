@@ -1,0 +1,18 @@
+install.packages("usethis")
+usethis::create_package(".")
+usethis::use_gpl3_license()
+usethis::use_testthat()
+usethis::use_vignette("getting_started")
+usethis::use_description(fields = list(
+  Title = "Pharmacogenomics Dose-Response Analysis with Population Context",
+  Description = "A toolkit for fitting, visualizing, and comparing dose-response curves across cancer cell lines. Provides functions for IC50/AUC extraction, population-stratified visualization by ancestry and genomic feature status as well as downstream correlation with omics data.",
+  `Authors@R` = 'person("Qualia", "Hooker", role = c("aut", "cre"), email = lia.hooker@vai.edu")'
+))
+q()
+usethis::use_git()
+q()
+usethis::use_git()
+q()
+usethis::use_git()
+usethis::use_github(private = TRUE)
+q()
