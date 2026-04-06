@@ -30,6 +30,7 @@
 #' @examples
 #' \dontrun{
 #' raw <- load_data("drug_response_data.csv")
+#' raw <- load_data("drug_response_data.csv", col_map = list(condition = "treatment_group"))
 #' }
 load_data <- function(filepath, col_map = NULL) {
   if (!file.exists(filepath)) {
@@ -69,6 +70,13 @@ load_data <- function(filepath, col_map = NULL) {
   data$ancestry          <- factor(data$ancestry)
   data$feature     <- factor(data$feature)
   
+  #additional optional columns that will be factored if present, but ignore if not
+  optional_factor_cols <- c("condition")
+  for (col in optional_factor_cols) {
+    if (col %in% colnames(data)) {
+      data[[col]] <- factor(data[[col]])
+    }
+  }
   data
 }
 
@@ -124,6 +132,11 @@ combine_reps <- function(data, replicate_col = NULL) {
       length(unique(data[[replicate_col]])),
       replicate_col
     ))
+  }
+  #if condition is present include it in the grouping variable
+  group_vars <- c("cell_line", "dose", "ancestry", "feature")
+  if ("condition" %in% colnames(data)) {
+    group_vars <- c(group_vars, "condition")
   }
   
   data |>
