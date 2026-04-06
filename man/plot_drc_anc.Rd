@@ -9,6 +9,7 @@ plot_drc_anc(
   pred_data,
   title = "",
   y_label = "Effect (\%)",
+  x_label = "Dose",
   ancestry_colors = ANCESTRY_COLORS,
   ancestry_linetypes = ANCESTRY_LINETYPES,
   label_size = 3
@@ -22,6 +23,8 @@ plot_drc_anc(
 \item{title}{Character. Plot title. Default \code{""}.}
 
 \item{y_label}{Character. Y-axis label. Default \code{"Effect (\%)"}.}
+
+\item{x_label}{Character. X-axis label. Default \code{"Dose"}.}
 
 \item{ancestry_colors}{Named character vector of hex colors per ancestry
 group. Default \link{ANCESTRY_COLORS}.}

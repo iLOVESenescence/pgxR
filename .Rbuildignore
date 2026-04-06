@@ -15,3 +15,5 @@
 ^saved_source_markers$
 ^sessions$
 ^sources$
+^data-raw$
+^README\.Rmd$

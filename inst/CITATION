@@ -1,0 +1,8 @@
+citEntry(
+  entry   = "Manual",
+  title   = "pgxR: Pharmacogenomics Dose-Response Analysis with Population Context",
+  author  = person("Qualia", "Hooker"),
+  year    = "2026",
+  note    = "R package version 0.1.0",
+  url     = "https://github.com/iLOVESenescence/pgxR"
+)

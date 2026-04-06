@@ -4,12 +4,14 @@
 \alias{plot_anc}
 \title{Plot IC50 estimates grouped by ancestry}
 \usage{
-plot_anc(ic50_df, title = "", ancestry_colors = ANCESTRY_COLORS)
+plot_anc(ic50_df, title = "", units = "nM", ancestry_colors = ANCESTRY_COLORS)
 }
 \arguments{
 \item{ic50_df}{IC50 data frame from \code{\link[=extract_all]{extract_all()}}.}
 
 \item{title}{Character. Plot title. Default \code{""}.}
+
+\item{units}{Character. Concentration units for y-axis label. Default \code{"nM"}.}
 
 \item{ancestry_colors}{Named character vector of hex colors per ancestry
 group. Default \link{ANCESTRY_COLORS}.}

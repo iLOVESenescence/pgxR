@@ -4,10 +4,16 @@
 \alias{combine_reps}
 \title{Aggregate replicate measurements by cell line and dose}
 \usage{
-combine_reps(data)
+combine_reps(data, replicate_col = NULL)
 }
 \arguments{
 \item{data}{A data frame from \code{\link[=load_data]{load_data()}}.}
+
+\item{replicate_col}{Character or \code{NULL}. Name of the column identifying
+replicates (e.g. \code{"experiment"}, \code{"replicate"}, \code{"run"}). If provided,
+validates the column exists before aggregating. If \code{NULL} (default),
+replicates are collapsed implicitly across all rows sharing the same
+\code{cell_line}, \code{dose}, \code{ancestry}, and \code{feature}.}
 }
 \value{
 A data frame with columns \code{cell_line}, \code{dose}, \code{ancestry},
@@ -18,9 +24,17 @@ Collapses technical or biological replicates to per-group means and standard
 deviations. This aggregated output is the expected input for all downstream
 fitting and plotting functions.
 }
+\details{
+Extra columns (e.g. replicate identifiers, experiment labels) are ignored
+during aggregation — only \code{cell_line}, \code{dose}, \code{ancestry}, \code{feature}, and
+\code{response} are used.
+}
 \examples{
 \dontrun{
-raw <- load_data("drug_response_data.csv")
+# implicit replicate collapsing
 agg <- combine_reps(raw)
+
+# explicit replicate column
+agg <- combine_reps(raw, replicate_col = "experiment")
 }
 }

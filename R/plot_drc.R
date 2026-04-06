@@ -11,6 +11,7 @@
 #' @param colors Optional ggplot2 color scale (
 #'   `ggsci::scale_colour_nejm()`). Default `NULL`.
 #' @param y_label Character. Y-axis label. Default `"Effect (%)"`.
+#' @param x_label Character. X-axis label. Default `"Dose"`.
 #'
 #' @return A `ggplot` object.
 #' @export
@@ -20,7 +21,7 @@
 #' p <- plot_drc(agg, preds, title = "Drug Response")
 #' }
 plot_drc <- function(agg_data, pred_data, title = "", 
-                     y_label = "Effect (%)" , colors = NULL) {
+                     y_label = "Effect (%)" , x_label = "Dose", colors = NULL) {
   validate_columns(agg_data, c("dose", "mean_response", "sd", "cell_line"))
   validate_columns(pred_data, c("dose", "predicted_response", "cell_line"))
   
@@ -38,7 +39,7 @@ plot_drc <- function(agg_data, pred_data, title = "",
       ggplot2::aes(x = dose, y = predicted_response, color = cell_line),
       linewidth = 1
     ) +
-    ggplot2::scale_x_log10(name = "Dose [\u00b5M]") +
+    ggplot2::scale_x_log10(name = x_label) +
     ggplot2::scale_y_continuous(name = y_label, limits = c(0, 110)) +
     drc_theme() +
     ggplot2::ggtitle(title)
@@ -63,6 +64,7 @@ plot_drc <- function(agg_data, pred_data, title = "",
 #'   group. Default [ANCESTRY_LINETYPES].
 #' @param label_size Numeric. Font size for cell line labels. Default `3`.
 #' @param y_label Character. Y-axis label. Default `"Effect (%)"`.
+#' @param x_label Character. X-axis label. Default `"Dose"`.
 #'
 #' @return A `ggplot` object.
 #' @export
@@ -75,6 +77,7 @@ plot_drc_anc <- function(agg_data,
                          pred_data,
                          title = "",
                          y_label = "Effect (%)",
+                         x_label            = "Dose",
                          ancestry_colors    = ANCESTRY_COLORS,
                          ancestry_linetypes = ANCESTRY_LINETYPES,
                          label_size         = 3) {
@@ -131,7 +134,7 @@ plot_drc_anc <- function(agg_data,
       nudge_y      = 5
     ) +
     ggplot2::facet_wrap(~feature, scales = "free") +
-    ggplot2::scale_x_log10(name = "Dose [\u00b5M]") +
+    ggplot2::scale_x_log10(name = x_label) +
     ggplot2::scale_y_continuous(name = y_label, limits = c(0, 110)) +
     ggplot2::scale_color_manual(values = ancestry_colors) +
     ggplot2::scale_linetype_manual(values = ancestry_linetypes) +

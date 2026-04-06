@@ -7,6 +7,7 @@
 plot_feature(
   ic50_df,
   title = "",
+  units = "nM",
   colors = NULL,
   ancestry_linetypes = ANCESTRY_LINETYPES
 )
@@ -15,6 +16,8 @@ plot_feature(
 \item{ic50_df}{IC50 data frame from \code{\link[=extract_all]{extract_all()}}.}
 
 \item{title}{Character. Plot title. Default \code{""}.}
+
+\item{units}{Character. Concentration units for y-axis label. Default \code{"nM"}.}
 
 \item{colors}{Optional ggplot2 fill scale. Default \code{NULL}.}
 

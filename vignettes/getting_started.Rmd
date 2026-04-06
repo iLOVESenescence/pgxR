@@ -1,19 +1,187 @@
 ---
-title: "getting_started"
+title: "Getting Started with pgxR"
+author: "Qualia Hooker"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{getting_started}
+  %\VignetteIndexEntry{Getting Started with pgxR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+  collapse  = TRUE,
+  comment   = "#>",
+  fig.width  = 10,
+  fig.height = 6,
+  warning   = FALSE,
+  message   = FALSE
 )
 ```
 
-```{r setup}
+## Overview
+
+`pgxR` is a pharmacogenomics toolkit for fitting dose-response curves,
+extracting sensitivity metrics (IC50, AUC, Hill slope), and visualizing
+responses stratified by ancestry and genomic feature status.
+
+The typical workflow is:
+```
+load_data() → combine_reps() → fit_all() → predict_drc()
+                                          ↓
+                                summarize_drc()  ← IC50, AUC, Hill slope
+                                          ↓
+                                plot_*()         ← visualization
+                                          ↓
+                                run_aov()        ← statistics
+```
+
+---
+
+## 1. Load and preprocess data
+
+`pgxR` ships with a synthetic paclitaxel dose-response dataset simulating
+8 lung cancer cell lines across 4 ancestry groups (AFR, EUR, EAS, AMR) and
+4 genomic feature groups (NF1-del, KRAS-mut, TP53-mut, WT).
+```{r load}
 library(pgxR)
+
+data(pgxr_example)
+head(pgxr_example)
+```
+
+Aggregate replicates to per-cell-line means:
+```{r aggregate}
+agg <- combine_reps(pgxr_example)
+head(agg)
+```
+
+---
+
+## 2. Fit dose-response models
+
+`fit_all()` fits a 4-parameter log-logistic model (LL.4) to each cell line:
+```{r fit, message = FALSE, warning = FALSE}
+fits <- fit_all(agg, unique(agg$cell_line))
+```
+
+---
+
+## 3. Generate predictions
+```{r predict}
+preds <- predict_drc(fits, agg)
+```
+
+---
+
+## 4. Extract pharmacological metrics
+
+`summarize_drc()` returns IC50, AUC, and Hill slope in a single tidy table:
+```{r metrics}
+metrics <- summarize_drc(fits, agg, preds)
+metrics
+```
+
+IC50 and AUC capture complementary information:
+
+- **IC50** — dose at 50% effect, undefined when curves don't reach 50%
+- **AUC** — integrates the full curve, always defined, higher = more sensitive
+- **Hill slope** — steepness of the transition, larger absolute value = sharper switch
+
+---
+
+## 5. Visualize dose-response curves
+
+### All cell lines
+```{r plot-drc, fig.cap = "Dose-response curves colored by cell line."}
+plot_drc(agg, preds, title = "Paclitaxel Response")
+```
+
+### Stratified by ancestry and feature
+```{r plot-ancestry, fig.cap = "DRC faceted by feature, colored by ancestry."}
+plot_drc_anc(agg, preds,
+             title   = "Paclitaxel Response by Ancestry",
+             x_label = "Dose [nM]")
+```
+
+---
+
+## 6. Visualize IC50 estimates
+```{r plot-dot, fig.cap = "IC50 point estimates with 95% confidence intervals."}
+ic50 <- extract_all(fits, agg)
+plot_dot(ic50, title = "Paclitaxel IC50", units = "nM")
+```
+```{r plot-feature, fig.cap = "IC50 faceted by genomic feature."}
+plot_feature(ic50, title = "Paclitaxel IC50 by Feature", units = "nM")
+```
+```{r plot-anc, fig.cap = "IC50 colored by ancestry."}
+plot_anc(ic50, title = "Paclitaxel IC50 by Ancestry", units = "nM")
+```
+
+---
+
+## 7. Visualize AUC
+```{r plot-auc, fig.cap = "Normalized AUC per cell line colored by ancestry."}
+auc <- calc_auc(preds)
+plot_auc(auc, title = "Paclitaxel AUC")
+```
+
+---
+
+## 8. Group comparisons with p-values
+```{r plot-sensitivity, fig.width = 7, fig.cap = "IC50 by ancestry with Wilcoxon p-values."}
+plot_sensitivity(metrics,
+                 group_col = "ancestry",
+                 metric    = "IC50",
+                 units     = "nM",
+                 title     = "Paclitaxel IC50 by Ancestry")
+```
+
+---
+
+## 9. Statistical testing
+
+### ANOVA across ancestry groups
+```{r stats-anova}
+res <- run_aov(metrics, group_col = "ancestry", metric = "IC50")
+```
+
+### ANOVA across feature groups
+```{r stats-feature}
+res_feature <- run_aov(metrics, group_col = "feature", metric = "AUC")
+```
+
+---
+
+## 10. Working with your own data
+
+If your CSV uses different column names or your drug is measured in µM,
+use `col_map` and the `units` argument:
+```{r own-data, eval = FALSE}
+# load with column mapping
+raw <- load_data("my_data.csv",
+                 col_map = list(feature = "translocation"))
+
+# standardize ancestry to 1KGP/HGDP abbreviations
+raw$ancestry <- standardize_ancestry(as.character(raw$ancestry))
+
+# aggregate — specify replicate column if present
+agg     <- combine_reps(raw, replicate_col = "experiment")
+fits    <- fit_all(agg, unique(agg$cell_line))
+preds   <- predict_drc(fits, agg)
+metrics <- summarize_drc(fits, agg, preds)
+
+# use units = "\u00b5M" for micromolar data
+plot_dot(metrics, units = "\u00b5M", title = "My Drug IC50")
+plot_sensitivity(metrics,
+                 group_col = "ancestry",
+                 units     = "\u00b5M",
+                 title     = "IC50 by Ancestry")
+```
+
+---
+
+## Session info
+```{r session}
+sessionInfo()
 ```

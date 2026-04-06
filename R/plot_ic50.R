@@ -8,7 +8,8 @@
 #' @param ic50_df IC50 data frame from [extract_all()].
 #' @param title Character. Plot title. Default `""`.
 #' @param colors Optional ggplot2 color scale. Default `NULL`.
-#'
+#' @param units Character. Concentration units for y-axis label. Default `"nM"`.
+#' 
 #' @return A `ggplot` object.
 #' @export
 #'
@@ -16,7 +17,7 @@
 #' \dontrun{
 #' p <- plot_dot(ic50, title = "Drug IC50")
 #' }
-plot_dot <- function(ic50_df, title = "", colors = NULL) {
+plot_dot <- function(ic50_df, title = "",units = "nM", colors = NULL) {
   validate_columns(ic50_df,
                    c("cell_line", "Estimate", "Lower", "Upper"))
   
@@ -33,7 +34,7 @@ plot_dot <- function(ic50_df, title = "", colors = NULL) {
       ggplot2::aes(ymin = Lower, ymax = Upper),
       width = 0.2, alpha = 0.8
     ) +
-    ggplot2::scale_y_continuous(name = "IC50 [\u00b5M]") +
+    ggplot2::scale_y_continuous(name = "IC50 [%s]") +
     ggplot2::scale_x_discrete(name = "") +
     drc_theme() +
     ggplot2::theme(
@@ -57,6 +58,7 @@ plot_dot <- function(ic50_df, title = "", colors = NULL) {
 #' @param colors Optional ggplot2 fill scale. Default `NULL`.
 #' @param ancestry_linetypes Named character vector mapping ancestry to
 #'   linetypes. Default [ANCESTRY_LINETYPES].
+#' @param units Character. Concentration units for y-axis label. Default `"nM"`.
 #'
 #' @return A `ggplot` object.
 #' @export
@@ -66,9 +68,10 @@ plot_dot <- function(ic50_df, title = "", colors = NULL) {
 #' p <- plot_feature(ic50, title = "IC50 by Feature")
 #' }
 plot_feature <- function(ic50_df,
-                                 title = "",
-                                 colors = NULL,
-                                 ancestry_linetypes = ANCESTRY_LINETYPES) {
+                         title = "",
+                         units = "nM",
+                         colors = NULL,
+                         ancestry_linetypes = ANCESTRY_LINETYPES) {
   validate_columns(ic50_df,
                    c("cell_line", "Estimate", "Lower", "Upper",
                      "ancestry", "feature"))
@@ -88,7 +91,7 @@ plot_feature <- function(ic50_df,
       width = 0.2, alpha = 0.8
     ) +
     ggplot2::facet_wrap(~feature) +
-    ggplot2::scale_y_continuous(name = "IC50 [\u00b5M]") +
+    ggplot2::scale_y_continuous(name = "IC50 [%s]") +
     ggplot2::scale_x_discrete(name = "") +
     ggplot2::scale_linetype_manual(values = ancestry_linetypes) +
     drc_theme() +
@@ -113,6 +116,7 @@ plot_feature <- function(ic50_df,
 #' @param title Character. Plot title. Default `""`.
 #' @param ancestry_colors Named character vector of hex colors per ancestry
 #'   group. Default [ANCESTRY_COLORS].
+#' @param units Character. Concentration units for y-axis label. Default `"nM"`.
 #'
 #' @return A `ggplot` object.
 #' @export
@@ -123,6 +127,7 @@ plot_feature <- function(ic50_df,
 #' }
 plot_anc <- function(ic50_df,
                      title = "",
+                     units = "nM",
                     ancestry_colors = ANCESTRY_COLORS) {
   validate_columns(ic50_df,
                    c("cell_line", "Estimate", "Lower", "Upper", "ancestry"))
@@ -140,7 +145,7 @@ plot_anc <- function(ic50_df,
       ggplot2::aes(ymin = Lower, ymax = Upper),
       width = 0.2, alpha = 0.8
     ) +
-    ggplot2::scale_y_continuous(name = "IC50 [\u00b5M]") +
+    ggplot2::scale_y_continuous(name = "IC50 [%s]") +
     ggplot2::scale_x_discrete(name = "") +
     ggplot2::scale_color_manual(values = ancestry_colors) +
     drc_theme() +
@@ -219,6 +224,8 @@ plot_auc <- function(auc_df, title = "", ancestry_colors = ANCESTRY_COLORS) {
 #'   If `NULL` (default) all pairwise comparisons are shown.
 #' @param y_label Character. Y-axis label. Default uses `metric` value.
 #' @param title Character. Plot title. Default `""`.
+#' @param units Character. Concentration units for y-axis label when
+#'   `metric = "IC50"`. Default `"nM"`.
 #'
 #' @return A `ggplot` object.
 #' @export
@@ -234,6 +241,7 @@ plot_auc <- function(auc_df, title = "", ancestry_colors = ANCESTRY_COLORS) {
 plot_sensitivity <- function(df,
                              group_col,
                              metric = "IC50",
+                             units = "nM",
                              colors = NULL,
                              comparisons = NULL,
                              y_label = NULL,
@@ -242,7 +250,7 @@ plot_sensitivity <- function(df,
   
   if (is.null(y_label)) {
     y_label <- switch(metric,
-                      "IC50" = "IC50 [\u00b5M]",
+                      "IC50" = sprintf("IC50 [%s]", units),
                       "AUC" = "AUC (normalized)",
                       "hill_slope" = "Hill Slope",
                       metric        

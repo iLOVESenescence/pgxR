@@ -4,10 +4,17 @@
 \alias{load_data}
 \title{Load and preprocess dose-response data}
 \usage{
-load_data(filepath)
+load_data(filepath, col_map = NULL)
 }
 \arguments{
 \item{filepath}{Character. Path to the input CSV file.}
+
+\item{col_map}{Named list mapping pgxR's expected column names to the
+actual column names in your CSV. Only specify columns that differ.
+For example, if your CSV has \code{translocation} instead of \code{feature}:
+\code{col_map = list(feature = "translocation")}.
+Or if ancestry is stored as \code{population}:
+\code{col_map = list(ancestry = "population", feature = "translocation")}.}
 }
 \value{
 A data frame with \code{dose} and \code{response} as numeric, and

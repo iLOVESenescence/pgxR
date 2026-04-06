@@ -4,12 +4,14 @@
 \alias{plot_dot}
 \title{Plot IC50 estimates as a dot plot with confidence intervals}
 \usage{
-plot_dot(ic50_df, title = "", colors = NULL)
+plot_dot(ic50_df, title = "", units = "nM", colors = NULL)
 }
 \arguments{
 \item{ic50_df}{IC50 data frame from \code{\link[=extract_all]{extract_all()}}.}
 
 \item{title}{Character. Plot title. Default \code{""}.}
+
+\item{units}{Character. Concentration units for y-axis label. Default \code{"nM"}.}
 
 \item{colors}{Optional ggplot2 color scale. Default \code{NULL}.}
 }

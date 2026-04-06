@@ -8,6 +8,7 @@ plot_sensitivity(
   df,
   group_col,
   metric = "IC50",
+  units = "nM",
   colors = NULL,
   comparisons = NULL,
   y_label = NULL,
@@ -23,6 +24,9 @@ column. Typically output from \code{\link[=summarize_drc]{summarize_drc()}} or \
 
 \item{metric}{Character. Name of the sensitivity metric column to plot.
 Default \code{"IC50"}.}
+
+\item{units}{Character. Concentration units for y-axis label when
+\code{metric = "IC50"}. Default \code{"nM"}.}
 
 \item{colors}{Optional ggplot2 fill/color scale. Default \code{NULL}.}
 

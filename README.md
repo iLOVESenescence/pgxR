@@ -7,6 +7,7 @@
 Check](https://github.com/iLOVESenescence/pgxR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/iLOVESenescence/pgxR/actions)
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![R-CMD-check](https://github.com/iLOVESenescence/pgxR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/iLOVESenescence/pgxR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview
@@ -151,7 +152,7 @@ raw$ancestry <- standardize_ancestry(as.character(raw$ancestry))
 
 If you use pgxR in your research please cite:
 
-> Hooker Q (2026). pgxR: Pharmacogenomics Dose-Response Analysis with
+> Hooker Q (2025). pgxR: Pharmacogenomics Dose-Response Analysis with
 > Population Context. R package version 0.1.0.
 > <https://github.com/iLOVESenescence/pgxR>
 

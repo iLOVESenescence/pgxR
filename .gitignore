@@ -5,3 +5,20 @@
 .DS_Store
 .quarto
 inst/doc
+# RStudio Server files
+addin_registry
+client-state
+history_database
+log
+monitored
+notebooks
+pcs
+persistent-state
+projects
+projects_settings
+rstudio-server.json
+saved_source_markers
+sessions
+sources
+pgxR.Rproj
+*.Rproj

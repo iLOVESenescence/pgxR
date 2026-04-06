@@ -9,6 +9,7 @@ plot_drc(
   pred_data,
   title = "",
   y_label = "Effect (\%)",
+  x_label = "Dose",
   colors = NULL
 )
 }
@@ -20,6 +21,8 @@ plot_drc(
 \item{title}{Character. Plot title. Default \code{""}.}
 
 \item{y_label}{Character. Y-axis label. Default \code{"Effect (\%)"}.}
+
+\item{x_label}{Character. X-axis label. Default \code{"Dose"}.}
 
 \item{colors}{Optional ggplot2 color scale (
 \code{ggsci::scale_colour_nejm()}). Default \code{NULL}.}
