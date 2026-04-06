@@ -37,5 +37,6 @@ The input CSV must contain the following columns:
 \examples{
 \dontrun{
 raw <- load_data("drug_response_data.csv")
+raw <- load_data("drug_response_data.csv", col_map = list(condition = "treatment_group"))
 }
 }
