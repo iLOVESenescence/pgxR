@@ -22,7 +22,7 @@ genomic feature status.
 
 - Fit 4-parameter log-logistic dose-response models via `drc`
 - Extract IC50, AUC, and Hill slope in a single tidy table
-- Visualize curves stratified by ancestry (1KGP/HGDP superpopulations)
+- Visualize curves stratified by ancestry (HGDP\1KGP superpopulations)
 - Facet by any genomic feature — translocation, driver mutation, CNV
   status
 - Compare sensitivity across groups with built-in ANOVA and Wilcoxon
@@ -98,10 +98,10 @@ metrics <- summarize_drc(fits, agg, preds)
 metrics
 #>   cell_line ancestry  feature       IC50 IC50_lower IC50_upper       AUC
 #> 1      pLC1      AFR  NF1-del   3.536447   2.589674   4.483219 0.5920703
-#> 2      pLC2      AFR KRAS-mut 152.766177  40.625935 264.906418 0.1257630
+#> 2      pLC2      AFR KRAS-mut 152.766177  40.625936 264.906418 0.1257630
 #> 3      pLC3      EUR  NF1-del   5.958059   5.693701   6.222418 0.5333453
 #> 4      pLC4      EUR TP53-mut  19.580997  15.971253  23.190741 0.3234936
-#> 5      pLC5      EAS TP53-mut  16.196019  11.350597  21.041442 0.3574289
+#> 5      pLC5      EAS TP53-mut  16.196019  11.350596  21.041442 0.3574289
 #> 6      pLC6      EAS KRAS-mut  82.993387  74.128870  91.857905 0.1443219
 #> 7      pLC7      AMR       WT  35.081798  30.812033  39.351564 0.2848864
 #> 8      pLC8      AMR       WT  42.681382  38.922816  46.439947 0.2593990

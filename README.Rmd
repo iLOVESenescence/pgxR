@@ -29,7 +29,7 @@ population stratification by ancestry and genomic feature status.
 
 - Fit 4-parameter log-logistic dose-response models via `drc`
 - Extract IC50, AUC, and Hill slope in a single tidy table
-- Visualize curves stratified by ancestry (1KGP/HGDP superpopulations)
+- Visualize curves stratified by ancestry (HGDP\1KGP superpopulations)
 - Facet by any genomic feature — translocation, driver mutation, CNV status
 - Compare sensitivity across groups with built-in ANOVA and Wilcoxon tests
 - Flexible column mapping 
