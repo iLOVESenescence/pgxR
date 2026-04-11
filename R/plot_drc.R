@@ -5,8 +5,8 @@
 #' Overlays observed data points (with SD error bars) and smooth fitted curves
 #' for all cell lines on a single log10-scaled dose axis.
 #'
-#' @param agg_data Aggregated data frame from [combine_reps()].
-#' @param pred_data Prediction data frame from [predict_drc()].
+#' @param agg_data Aggregated data frame from [combineReps()].
+#' @param pred_data Prediction data frame from [predictDRC()].
 #' @param title Character. Plot title. Default `""`.
 #' @param colors Optional ggplot2 color scale (
 #'   `ggsci::scale_colour_nejm()`). Default `NULL`.
@@ -18,12 +18,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' p <- plot_drc(agg, preds, title = "Drug Response")
+#' p <- plotDRC(agg, preds, title = "Drug Response")
 #' }
-plot_drc <- function(agg_data, pred_data, title = "", 
+plotDRC <- function(agg_data, pred_data, title = "", 
                      y_label = "Effect (%)" , x_label = "Dose", colors = NULL) {
-  validate_columns(agg_data, c("dose", "mean_response", "sd", "cell_line"))
-  validate_columns(pred_data, c("dose", "predicted_response", "cell_line"))
+  validateCols(agg_data, c("dose", "mean_response", "sd", "cell_line"))
+  validateCols(pred_data, c("dose", "predicted_response", "cell_line"))
   
   p <- ggplot2::ggplot(
     agg_data,
@@ -55,8 +55,8 @@ plot_drc <- function(agg_data, pred_data, title = "",
 #' at the highest dose point using [ggrepel::geom_text_repel()]. Panels are
 #' faceted by feature group.
 #'
-#' @param agg_data Aggregated data frame from [combine_reps()].
-#' @param pred_data Prediction data frame from [predict_drc()].
+#' @param agg_data Aggregated data frame from [combineReps()].
+#' @param pred_data Prediction data frame from [predictDRC()].
 #' @param title Character. Plot title. Default `""`.
 #' @param ancestry_colors Named character vector of hex colors per ancestry
 #'   group. Default [ANCESTRY_COLORS].
@@ -71,9 +71,9 @@ plot_drc <- function(agg_data, pred_data, title = "",
 #'
 #' @examples
 #' \dontrun{
-#' p <- plot_drc_anc(agg, preds, title = "Drug Response by Ancestry")
+#' p <- plotDRCAnc(agg, preds, title = "Drug Response by Ancestry")
 #' }
-plot_drc_anc <- function(agg_data,
+plotDRCAnc <- function(agg_data,
                          pred_data,
                          title = "",
                          y_label = "Effect (%)",
@@ -81,10 +81,10 @@ plot_drc_anc <- function(agg_data,
                          ancestry_colors    = ANCESTRY_COLORS,
                          ancestry_linetypes = ANCESTRY_LINETYPES,
                          label_size         = 3) {
-  validate_columns(agg_data,
+  validateCols(agg_data,
                    c("dose", "mean_response", "sd", "ancestry",
                      "cell_line", "feature"))
-  validate_columns(pred_data,
+  validateCols(pred_data,
                    c("dose", "predicted_response", "ancestry",
                      "cell_line", "feature"))
   

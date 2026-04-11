@@ -5,7 +5,7 @@
 #' Displays point estimates and CI error bars for all cell lines ordered by
 #' ascending IC50. The recommended default for overall sensitivity comparison.
 #'
-#' @param ic50_df IC50 data frame from [extract_all()].
+#' @param ic50_df IC50 data frame from [extractALL()].
 #' @param title Character. Plot title. Default `""`.
 #' @param colors Optional ggplot2 color scale. Default `NULL`.
 #' @param units Character. Concentration units for y-axis label. Default `"nM"`.
@@ -15,10 +15,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' p <- plot_dot(ic50, title = "Drug IC50")
+#' p <- plotDot(ic50, title = "Drug IC50")
 #' }
-plot_dot <- function(ic50_df, title = "",units = "nM", colors = NULL) {
-  validate_columns(ic50_df,
+plotDot <- function(ic50_df, title = "",units = "nM", colors = NULL) {
+  validateCols(ic50_df,
                    c("cell_line", "Estimate", "Lower", "Upper"))
   
   p <- ggplot2::ggplot(
@@ -53,7 +53,7 @@ plot_dot <- function(ic50_df, title = "",units = "nM", colors = NULL) {
 #' Point estimates and CI error bars per cell line, faceted by feature group
 #' (e.g. translocation status, driver mutation). Ancestry encoded by linetype.
 #'
-#' @param ic50_df IC50 data frame from [extract_all()].
+#' @param ic50_df IC50 data frame from [extractALL()].
 #' @param title Character. Plot title. Default `""`.
 #' @param colors Optional ggplot2 fill scale. Default `NULL`.
 #' @param ancestry_linetypes Named character vector mapping ancestry to
@@ -65,14 +65,14 @@ plot_dot <- function(ic50_df, title = "",units = "nM", colors = NULL) {
 #'
 #' @examples
 #' \dontrun{
-#' p <- plot_feature(ic50, title = "IC50 by Feature")
+#' p <- plotFeature(ic50, title = "IC50 by Feature")
 #' }
-plot_feature <- function(ic50_df,
+plotFeature <- function(ic50_df,
                          title = "",
                          units = "nM",
                          colors = NULL,
                          ancestry_linetypes = ANCESTRY_LINETYPES) {
-  validate_columns(ic50_df,
+  validateCols(ic50_df,
                    c("cell_line", "Estimate", "Lower", "Upper",
                      "ancestry", "feature"))
   
@@ -112,7 +112,7 @@ plot_feature <- function(ic50_df,
 #' Cell lines are ordered by ascending IC50. Directly addresses whether
 #' ancestry-of-origin associates with drug sensitivity.
 #'
-#' @param ic50_df IC50 data frame from [extract_all()].
+#' @param ic50_df IC50 data frame from [extractALL()].
 #' @param title Character. Plot title. Default `""`.
 #' @param ancestry_colors Named character vector of hex colors per ancestry
 #'   group. Default [ANCESTRY_COLORS].
@@ -123,13 +123,13 @@ plot_feature <- function(ic50_df,
 #'
 #' @examples
 #' \dontrun{
-#' p <- plot_anc(ic50, title = "IC50 by Ancestry")
+#' p <- plotAnc(ic50, title = "IC50 by Ancestry")
 #' }
-plot_anc <- function(ic50_df,
+plotAnc <- function(ic50_df,
                      title = "",
                      units = "nM",
                     ancestry_colors = ANCESTRY_COLORS) {
-  validate_columns(ic50_df,
+  validateCols(ic50_df,
                    c("cell_line", "Estimate", "Lower", "Upper", "ancestry"))
   
   ggplot2::ggplot(
@@ -162,7 +162,7 @@ plot_anc <- function(ic50_df,
 #' Higher AUC indicates greater drug sensitivity. Complements IC50 for cell
 #' lines where curves do not reach 50% inhibition.
 #'
-#' @param auc_df AUC data frame from [calc_auc()].
+#' @param auc_df AUC data frame from [calcAUC()].
 #' @param title Character. Plot title. Default `""`.
 #' @param ancestry_colors Named character vector of hex colors per ancestry
 #'   group. Default [ANCESTRY_COLORS].
@@ -172,10 +172,10 @@ plot_anc <- function(ic50_df,
 #'
 #' @examples
 #' \dontrun{
-#' p <- plot_auc(auc, title = "Melphalan AUC")
+#' p <- plotAUC(auc, title = "Melphalan AUC")
 #' }
-plot_auc <- function(auc_df, title = "", ancestry_colors = ANCESTRY_COLORS) {
-  validate_columns(auc_df, c("cell_line", "AUC", "ancestry"))
+plotAUC <- function(auc_df, title = "", ancestry_colors = ANCESTRY_COLORS) {
+  validateCols(auc_df, c("cell_line", "AUC", "ancestry"))
   
   ggplot2::ggplot(
     auc_df,
@@ -214,7 +214,7 @@ plot_auc <- function(auc_df, title = "", ancestry_colors = ANCESTRY_COLORS) {
 #' (IC50, AUC, hill_slope).
 #'
 #' @param df A data frame containing the sensitivity metric and grouping
-#'   column. Typically output from [summarize_drc()] or [extract_all()].
+#'   column. Typically output from [summarizeDRC()] or [extractALL()].
 #' @param group_col Character. Name of the grouping column (e.g. `"ancestry"`,
 #'   `"feature"`).
 #' @param metric Character. Name of the sensitivity metric column to plot.
@@ -233,12 +233,12 @@ plot_auc <- function(auc_df, title = "", ancestry_colors = ANCESTRY_COLORS) {
 #' @examples
 #' \dontrun{
 #' # IC50 by ancestry
-#' plot_sensitivity(metrics, group_col = "ancestry", metric = "IC50")
+#' plotSensitivity(metrics, group_col = "ancestry", metric = "IC50")
 #'
 #' # AUC by feature
-#' plot_sensitivity(metrics, group_col = "feature", metric = "AUC")
+#' plotSensitivity(metrics, group_col = "feature", metric = "AUC")
 #' }
-plot_sensitivity <- function(df,
+plotSensitivity <- function(df,
                              group_col,
                              metric = "IC50",
                              units = "nM",
@@ -246,7 +246,7 @@ plot_sensitivity <- function(df,
                              comparisons = NULL,
                              y_label = NULL,
                              title = "") {
-  validate_columns(df, c(group_col, metric))
+  validateCols(df, c(group_col, metric))
   
   if (is.null(y_label)) {
     y_label <- switch(metric,

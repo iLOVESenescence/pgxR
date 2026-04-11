@@ -55,8 +55,8 @@ ANCESTRY_LINETYPES <- c(
 #' library(ggplot2)
 #' ggplot(mtcars, aes(wt, mpg)) +
 #'   geom_point() +
-#'   drc_theme()
-drc_theme <- function(base_size        = 12,
+#'   drcTheme()
+drcTheme <- function(base_size        = 12,
                       axis_title_size  = base_size + 2,
                       bold_axis_titles = FALSE) {
   title_face <- if (bold_axis_titles) "bold" else "plain"
@@ -88,8 +88,8 @@ drc_theme <- function(base_size        = 12,
 #' @export
 #' 
 #' @examples
-#' standardize_ancestry(c("African", "European", "East Asian"))
- standardize_ancestry <- function(x) {
+#' standardizeAncestry(c("African", "European", "East Asian"))
+ standardizeAncestry <- function(x) {
    lookup <- c(
      "African" = "AFR",
      "Admixed American" = "AMR",
@@ -125,7 +125,7 @@ drc_theme <- function(base_size        = 12,
 #' @param arg_name Name of the argument being checked, used in error messages.
 #' @keywords internal
  # Internal helpers (not exported)
-validate_columns <- function(data, required, arg_name = "data") {
+validateCols <- function(data, required, arg_name = "data") {
   missing_cols <- setdiff(required, colnames(data))
   if (length(missing_cols) > 0) {
     stop(

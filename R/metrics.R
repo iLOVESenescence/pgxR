@@ -5,7 +5,7 @@
 #' Uses [drc::ED()] with delta-method confidence intervals to estimate the
 #' dose producing 50% effect.
 #'
-#' @param fit A `drc` model object from [fit_cl()].
+#' @param fit A `drc` model object from [fitCL()].
 #' @param cell_line Character. Cell line name appended as a column.
 #' @param ancestry Character or `NA`. Ancestry label appended as a column.
 #' @param feature Character or `NA`. Feature label appended as a column.
@@ -13,7 +13,7 @@
 #' @return A one-row data frame with columns `Estimate`, `SE`, `Lower`,
 #'   `Upper`, `cell_line`, `ancestry`, `feature`.
 #' @export
-extract_ic50 <- function(fit, cell_line,
+extractIC50 <- function(fit, cell_line,
                          ancestry = NA, feature = NA) {
   ic50_mat <- suppressWarnings(drc::ED(fit, 50, interval = "delta"))
   ic50_df  <- as.data.frame(ic50_mat)
@@ -29,18 +29,18 @@ extract_ic50 <- function(fit, cell_line,
 
 #' Extract IC50 estimates for all fitted cell lines
 #'
-#' Joins cell line metadata from `agg_data` and calls [extract_ic50()] for
+#' Joins cell line metadata from `agg_data` and calls [extractIC50()] for
 #' each model in the list.
 #'
-#' @param fits Named list of `drc` model objects from [fit_all()].
-#' @param agg_data Aggregated data frame from [combine_reps()], used to recover
+#' @param fits Named list of `drc` model objects from [fitALL()].
+#' @param agg_data Aggregated data frame from [combineReps()], used to recover
 #'   `ancestry` and `feature` metadata per cell line.
 #'
 #' @return A data frame with columns `Estimate`, `SE`, `Lower`, `Upper`,
 #'   `cell_line`, `ancestry`, `feature`.
 #' @export
-extract_all <- function(fits, agg_data) {
-  validate_columns(agg_data, c("cell_line", "ancestry", "feature"),
+extractALL <- function(fits, agg_data) {
+  validateCols(agg_data, c("cell_line", "ancestry", "feature"),
                    arg_name = "agg_data")
   
   cell_line_info <- agg_data |>
@@ -65,7 +65,7 @@ extract_all <- function(fits, agg_data) {
 #' A higher AUC indicates greater drug sensitivity. AUC is normalized to
 #' \[0, 1\] by default by dividing by the total log-dose range.
 #'
-#' @param pred_data Prediction data frame from [predict_drc()].
+#' @param pred_data Prediction data frame from [predictDRC()].
 #' @param normalize Logical. If `TRUE` (default), AUC is divided by the total
 #'   log10 dose range so values fall in \[0, 1\].
 #'
@@ -75,10 +75,10 @@ extract_all <- function(fits, agg_data) {
 #'
 #' @examples
 #' \dontrun{
-#' auc <- calc_auc(preds)
+#' auc <- calcAUC(preds)
 #' }
-calc_auc <- function(pred_data, normalize = TRUE) {
-  validate_columns(pred_data,
+calcAUC <- function(pred_data, normalize = TRUE) {
+  validateCols(pred_data,
                    c("cell_line", "dose", "predicted_response",
                      "ancestry", "feature"))
   
@@ -118,8 +118,8 @@ calc_auc <- function(pred_data, normalize = TRUE) {
 #' steepness of the dose-response transition. A steeper slope indicates
 #' a sharper switch between no-effect and full-effect doses.
 #'
-#' @param fits Named list of `drc` model objects from [fit_all()].
-#' @param agg_data Aggregated data frame from [combine_reps()].
+#' @param fits Named list of `drc` model objects from [fitALL()].
+#' @param agg_data Aggregated data frame from [combineReps()].
 #'
 #' @return A data frame with columns `cell_line`, `ancestry`, `feature`,
 #'   `hill_slope`, and `hill_slope_se`.
@@ -127,10 +127,10 @@ calc_auc <- function(pred_data, normalize = TRUE) {
 #'
 #' @examples
 #' \dontrun{
-#' hills <- extract_hill_slope(fits, agg)
+#' hills <- extractHillSlope(fits, agg)
 #' }
-extract_hill_slope <- function(fits, agg_data) {
-  validate_columns(agg_data, c("cell_line", "ancestry", "feature"),
+extractHillSlope <- function(fits, agg_data) {
+  validateCols(agg_data, c("cell_line", "ancestry", "feature"),
                    arg_name = "agg_data")
   
   cell_line_info <- agg_data |>
@@ -160,10 +160,10 @@ extract_hill_slope <- function(fits, agg_data) {
 #' tidy data frame. Recommended starting point for downstream statistical
 #' analysis and omics correlation.
 #'
-#' @param fits Named list of `drc` model objects from [fit_all()].
-#' @param agg_data Aggregated data frame from [combine_reps()].
-#' @param pred_data Prediction data frame from [predict_drc()].
-#' @param normalize_auc Logical. Passed to [calc_auc()]. Default `TRUE`.
+#' @param fits Named list of `drc` model objects from [fitALL()].
+#' @param agg_data Aggregated data frame from [combineReps()].
+#' @param pred_data Prediction data frame from [predictDRC()].
+#' @param normalize_auc Logical. Passed to [calcAUC()]. Default `TRUE`.
 #'
 #' @return A data frame with columns `cell_line`, `ancestry`, `feature`,
 #'   `IC50`, `IC50_lower`, `IC50_upper`, `AUC`, `hill_slope`.
@@ -171,17 +171,17 @@ extract_hill_slope <- function(fits, agg_data) {
 #'
 #' @examples
 #' \dontrun{
-#' metrics <- summarize_drc(fits, agg, preds)
+#' metrics <- summarizeDRC(fits, agg, preds)
 #' }
-summarize_drc <- function(fits, agg_data, pred_data, normalize_auc = TRUE) {
-  ic50 <- extract_all(fits, agg_data) |>
+summarizeDRC <- function(fits, agg_data, pred_data, normalize_auc = TRUE) {
+  ic50 <- extractALL(fits, agg_data) |>
     dplyr::select(cell_line, ancestry, feature,
                   IC50 = Estimate, IC50_lower = Lower, IC50_upper = Upper)
   
-  auc  <- calc_auc(pred_data, normalize = normalize_auc) |>
+  auc  <- calcAUC(pred_data, normalize = normalize_auc) |>
     dplyr::select(cell_line, AUC)
   
-  hill <- extract_hill_slope(fits, agg_data) |>
+  hill <- extractHillSlope(fits, agg_data) |>
     dplyr::select(cell_line, hill_slope)
   
   ic50 |>

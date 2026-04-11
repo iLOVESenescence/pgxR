@@ -6,7 +6,7 @@
 #' metric across levels of any grouping column. Works for ancestry, feature,
 #' or any other categorical variable in your data.
 #'
-#' @param metrics_df A data frame from [summarize_drc()] or [extract_all()].
+#' @param metrics_df A data frame from [summarizeDRC()] or [extractALL()].
 #' @param group_col Character. Name of the grouping column (e.g. `"ancestry"`,
 #'   `"feature"`).
 #' @param metric Character. Name of the numeric column to compare.
@@ -20,13 +20,13 @@
 #' @examples
 #' \dontrun{
 #' # by ancestry
-#' res <- run_aov(metrics, group_col = "ancestry", metric = "IC50")
+#' res <- runAOV(metrics, group_col = "ancestry", metric = "IC50")
 #'
 #' # by feature
-#' res <- run_aov(metrics, group_col = "feature", metric = "AUC")
+#' res <- runAOV(metrics, group_col = "feature", metric = "AUC")
 #' }
-run_aov <- function(metrics_df, group_col, metric = "IC50") {
-  validate_columns(metrics_df, c(metric, group_col))
+runAOV <- function(metrics_df, group_col, metric = "IC50") {
+  validateCols(metrics_df, c(metric, group_col))
   
   formula <- stats::as.formula(paste(metric, "~", group_col))
   aov_res <- stats::aov(formula, data = metrics_df)
@@ -47,7 +47,7 @@ run_aov <- function(metrics_df, group_col, metric = "IC50") {
 #' a grouping variable. Useful for mutant vs. wild-type or resistant vs.
 #' sensitive comparisons.
 #'
-#' @param metrics_df A data frame from [summarize_drc()] or [extract_all()].
+#' @param metrics_df A data frame from [summarizeDRC()] or [extractALL()].
 #' @param group_col Character. Name of the binary grouping column.
 #' @param metric Character. Name of the sensitivity column. Default `"IC50"`.
 #'
@@ -57,9 +57,9 @@ run_aov <- function(metrics_df, group_col, metric = "IC50") {
 #'
 #' @examples
 #' \dontrun{
-#' test_groups(metrics, group_col = "feature", metric = "AUC")
+#' testGroups(metrics, group_col = "feature", metric = "AUC")
 #' }
-test_groups <- function(metrics_df, group_col, metric = "IC50") {
+testGroups <- function(metrics_df, group_col, metric = "IC50") {
   validate_columns(metrics_df, c(group_col, metric))
   
   groups <- unique(metrics_df[[group_col]])

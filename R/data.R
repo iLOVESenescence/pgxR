@@ -29,10 +29,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' raw <- load_data("drug_response_data.csv")
-#' raw <- load_data("drug_response_data.csv", col_map = list(condition = "treatment_group"))
+#' raw <- loadData("drug_response_data.csv")
+#' raw <- loadData("drug_response_data.csv", col_map = list(condition = "treatment_group"))
 #' }
-load_data <- function(filepath, col_map = NULL) {
+loadData <- function(filepath, col_map = NULL) {
   if (!file.exists(filepath)) {
     stop(sprintf("File not found: '%s'", filepath), call. = FALSE)
   }
@@ -57,7 +57,7 @@ load_data <- function(filepath, col_map = NULL) {
     }
   }
   
-  validate_columns(
+  validateCols(
     data,
     c("dose", "response", "cell_line", "ancestry", "feature"),
     arg_name = "filepath"
@@ -91,7 +91,7 @@ load_data <- function(filepath, col_map = NULL) {
 #' during aggregation — only `cell_line`, `dose`, `ancestry`, `feature`, and
 #' `response` are used.
 #'
-#' @param data A data frame from [load_data()].
+#' @param data A data frame from [loadData()].
 #' @param replicate_col Character or `NULL`. Name of the column identifying
 #'   replicates (e.g. `"experiment"`, `"replicate"`, `"run"`). If provided,
 #'   validates the column exists before aggregating. If `NULL` (default),
@@ -105,13 +105,13 @@ load_data <- function(filepath, col_map = NULL) {
 #' @examples
 #' \dontrun{
 #' # implicit replicate collapsing
-#' agg <- combine_reps(raw)
+#' agg <- combineReps(raw)
 #'
 #' # explicit replicate column
-#' agg <- combine_reps(raw, replicate_col = "experiment")
+#' agg <- combineReps(raw, replicate_col = "experiment")
 #' }
-combine_reps <- function(data, replicate_col = NULL) {
-  validate_columns(
+combineReps <- function(data, replicate_col = NULL) {
+  validateCols(
     data,
     c("cell_line", "dose", "ancestry", "feature", "response")
   )
