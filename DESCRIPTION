@@ -1,6 +1,6 @@
 Package: pgxR
 Title: Pharmacogenomics Dose-Response Analysis with Population Context
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Qualia", "Hooker", role = c("aut", "cre"), email = "lia.hooker@vai.edu")
 Description: A toolkit for fitting, visualizing, and comparing
     dose-response curves across cancer cell lines. Provides functions for
