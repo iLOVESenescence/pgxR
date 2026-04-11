@@ -6,7 +6,8 @@ knitr::opts_chunk$set(
   collapse  = TRUE,
   comment   = "#>",
   fig.path  = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  devtools::load_all()
 )
 ```
 
@@ -29,7 +30,7 @@ population stratification by ancestry and genomic feature status.
 
 - Fit 4-parameter log-logistic dose-response models via `drc`
 - Extract IC50, AUC, and Hill slope in a single tidy table
-- Visualize curves stratified by ancestry (HGDP\1KGP superpopulations)
+- Visualize curves stratified by ancestry (HGDP+1KGP superpopulations)
 - Facet by any genomic feature — translocation, driver mutation, CNV status
 - Compare sensitivity across groups with built-in ANOVA and Wilcoxon tests
 - Flexible column mapping 
@@ -48,27 +49,27 @@ library(pgxR)
 data(pgxr_example)
 
 # aggregate replicates
-agg <- combine_reps(pgxr_example)
+agg <- combineReps(pgxr_example)
 
 # fit dose-response models
-fits <- fit_all(agg, unique(agg$cell_line))
+fits <- fitALL(agg, unique(agg$cell_line))
 
 # generate smooth predictions
-preds <- predict_drc(fits, agg)
+preds <- predictDRC(fits, agg)
 
 # extract all metrics in one table
-metrics <- summarize_drc(fits, agg, preds)
+metrics <- summarizeDRC(fits, agg, preds)
 metrics
 ```
 
 ## Visualization
 ```{r plot-drc, message = FALSE, warning = FALSE, fig.width = 10, fig.height = 6}
 # dose-response curves by ancestry, faceted by genomic feature
-plot_drc_anc(agg, preds, title = "Paclitaxel Response by Ancestry")
+plotDRCAnc(agg, preds, title = "Paclitaxel Response by Ancestry")
 ```
 ```{r plot-sensitivity, message = FALSE, warning = FALSE, fig.width = 7, fig.height = 5}
 # IC50 comparison across ancestry groups with p-values
-plot_sensitivity(metrics, group_col = "ancestry", metric = "IC50",
+plotSensitivity(metrics, group_col = "ancestry", metric = "IC50",
                  title = "Paclitaxel IC50 by Ancestry")
 ```
 
@@ -77,13 +78,19 @@ plot_sensitivity(metrics, group_col = "ancestry", metric = "IC50",
 pgxR expects columns `dose`, `response`, `cell_line`, `ancestry`, and
 `feature`. If your CSV uses different names, use `col_map`:
 ```r
-raw <- load_data(
+raw <- loadData(
   "my_data.csv",
   col_map = list(feature = "translocation")
 )
 
-# standardize ancestry labels to 1KGP/HGDP abbreviations
-raw$ancestry <- standardize_ancestry(as.character(raw$ancestry))
+# if your replicates are tracked in a column other than the default,
+# specify it with replicate_col
+agg <- combineReps(raw, replicate_col = "experiment")
+
+# standardize ancestry labels to HGDP+1KGP abbreviations
+raw$ancestry <- standardizeAncestry(as.character(raw$ancestry))
+
+
 ```
 
 ## Citation

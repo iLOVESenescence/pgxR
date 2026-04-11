@@ -49,7 +49,7 @@ extractALL <- function(fits, agg_data) {
   
   purrr::map_df(names(fits), function(cl) {
     info <- dplyr::filter(cell_line_info, cell_line == cl)
-    extract_ic50(fits[[cl]], cl,
+    extractIC50(fits[[cl]], cl,
                  ancestry = info$ancestry[1],
                  feature  = info$feature[1])
   })
