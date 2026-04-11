@@ -24,7 +24,7 @@ Iterates over a character vector of cell line names and calls
 }
 \examples{
 \dontrun{
-agg  <- combineReps(load_data("data.csv"))
+agg  <- combineReps(loadData("data.csv"))
 fits <- fitALL(agg, unique(agg$cell_line))
 }
 }

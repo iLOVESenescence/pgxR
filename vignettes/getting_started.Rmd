@@ -52,7 +52,7 @@ head(pgxr_example)
 
 Aggregate replicates to per-cell-line means:
 ```{r aggregate}
-agg <- combine_reps(pgxr_example)
+agg <- combineReps(pgxr_example)
 head(agg)
 ```
 
@@ -62,14 +62,14 @@ head(agg)
 
 `fit_all()` fits a 4-parameter log-logistic model (LL.4) to each cell line:
 ```{r fit, message = FALSE, warning = FALSE}
-fits <- fit_all(agg, unique(agg$cell_line))
+fits <- fitALL(agg, unique(agg$cell_line))
 ```
 
 ---
 
 ## 3. Generate predictions
 ```{r predict}
-preds <- predict_drc(fits, agg)
+preds <- predictDRC(fits, agg)
 ```
 
 ---
@@ -78,7 +78,7 @@ preds <- predict_drc(fits, agg)
 
 `summarize_drc()` returns IC50, AUC, and Hill slope in a single tidy table:
 ```{r metrics}
-metrics <- summarize_drc(fits, agg, preds)
+metrics <- summarizeDRC(fits, agg, preds)
 metrics
 ```
 
@@ -94,12 +94,12 @@ IC50 and AUC capture complementary information:
 
 ### All cell lines
 ```{r plot-drc, fig.cap = "Dose-response curves colored by cell line."}
-plot_drc(agg, preds, title = "Paclitaxel Response")
+plotDRC(agg, preds, title = "Paclitaxel Response")
 ```
 
 ### Stratified by ancestry and feature
 ```{r plot-ancestry, fig.cap = "DRC faceted by feature, colored by ancestry."}
-plot_drc_anc(agg, preds,
+plotDRCAnc(agg, preds,
              title   = "Paclitaxel Response by Ancestry",
              x_label = "Dose [nM]")
 ```
@@ -108,29 +108,29 @@ plot_drc_anc(agg, preds,
 
 ## 6. Visualize IC50 estimates
 ```{r plot-dot, fig.cap = "IC50 point estimates with 95% confidence intervals."}
-ic50 <- extract_all(fits, agg)
-plot_dot(ic50, title = "Paclitaxel IC50", units = "nM")
+ic50 <- extractALL(fits, agg)
+plotDot(ic50, title = "Paclitaxel IC50", units = "nM")
 ```
 ```{r plot-feature, fig.cap = "IC50 faceted by genomic feature."}
-plot_feature(ic50, title = "Paclitaxel IC50 by Feature", units = "nM")
+plotFeature(ic50, title = "Paclitaxel IC50 by Feature", units = "nM")
 ```
 ```{r plot-anc, fig.cap = "IC50 colored by ancestry."}
-plot_anc(ic50, title = "Paclitaxel IC50 by Ancestry", units = "nM")
+plotAnc(ic50, title = "Paclitaxel IC50 by Ancestry", units = "nM")
 ```
 
 ---
 
 ## 7. Visualize AUC
 ```{r plot-auc, fig.cap = "Normalized AUC per cell line colored by ancestry."}
-auc <- calc_auc(preds)
-plot_auc(auc, title = "Paclitaxel AUC")
+auc <- calcAUC(preds)
+plotAUC(auc, title = "Paclitaxel AUC")
 ```
 
 ---
 
 ## 8. Group comparisons with p-values
 ```{r plot-sensitivity, fig.width = 7, fig.cap = "IC50 by ancestry with Wilcoxon p-values."}
-plot_sensitivity(metrics,
+plotSensitivity(metrics,
                  group_col = "ancestry",
                  metric    = "IC50",
                  units     = "nM",
@@ -143,12 +143,12 @@ plot_sensitivity(metrics,
 
 ### ANOVA across ancestry groups
 ```{r stats-anova}
-res <- run_aov(metrics, group_col = "ancestry", metric = "IC50")
+res <- runAOV(metrics, group_col = "ancestry", metric = "IC50")
 ```
 
 ### ANOVA across feature groups
 ```{r stats-feature}
-res_feature <- run_aov(metrics, group_col = "feature", metric = "AUC")
+res_feature <- runAOV(metrics, group_col = "feature", metric = "AUC")
 ```
 
 ---
@@ -159,21 +159,21 @@ If your CSV uses different column names or your drug is measured in µM,
 use `col_map` and the `units` argument:
 ```{r own-data, eval = FALSE}
 # load with column mapping
-raw <- load_data("my_data.csv",
+raw <- loadData("my_data.csv",
                  col_map = list(feature = "translocation"))
 
 # standardize ancestry to 1KGP/HGDP abbreviations
-raw$ancestry <- standardize_ancestry(as.character(raw$ancestry))
+raw$ancestry <- standardizeAncestry(as.character(raw$ancestry))
 
 # aggregate — specify replicate column if present
-agg     <- combine_reps(raw, replicate_col = "experiment")
-fits    <- fit_all(agg, unique(agg$cell_line))
-preds   <- predict_drc(fits, agg)
+agg     <- combineReps(raw, replicate_col = "experiment")
+fits    <- fitALL(agg, unique(agg$cell_line))
+preds   <- predictDRC(fits, agg)
 metrics <- summarize_drc(fits, agg, preds)
 
 # use units = "\u00b5M" for micromolar data
-plot_dot(metrics, units = "\u00b5M", title = "My Drug IC50")
-plot_sensitivity(metrics,
+plotDot(metrics, units = "\u00b5M", title = "My Drug IC50")
+plotSensitivity(metrics,
                  group_col = "ancestry",
                  units     = "\u00b5M",
                  title     = "IC50 by Ancestry")

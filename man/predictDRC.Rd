@@ -26,7 +26,7 @@ functions.
 }
 \examples{
 \dontrun{
-agg   <- combineReps(load_data("data.csv"))
+agg   <- combineReps(loadData("data.csv"))
 fits  <- fitALL(agg, unique(agg$cell_line))
 preds <- predictDRC(fits, agg)
 }

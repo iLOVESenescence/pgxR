@@ -24,7 +24,7 @@ sigmoidal dose-response relationships.
 }
 \examples{
 \dontrun{
-agg  <- combineReps(load_data("data.csv"))
+agg  <- combineReps(loadData("data.csv"))
 fit  <- fitCL(agg, "SKMM-1")
 }
 }
