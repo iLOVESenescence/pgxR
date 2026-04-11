@@ -41,7 +41,7 @@ plotDRC <- function(agg_data, pred_data, title = "",
     ) +
     ggplot2::scale_x_log10(name = x_label) +
     ggplot2::scale_y_continuous(name = y_label, limits = c(0, 110)) +
-    drc_theme() +
+    drcTheme() +
     ggplot2::ggtitle(title)
   
   if (!is.null(colors)) p <- p + colors
@@ -138,6 +138,6 @@ plotDRCAnc <- function(agg_data,
     ggplot2::scale_y_continuous(name = y_label, limits = c(0, 110)) +
     ggplot2::scale_color_manual(values = ancestry_colors) +
     ggplot2::scale_linetype_manual(values = ancestry_linetypes) +
-    drc_theme(axis_title_size = 16, bold_axis_titles = TRUE) +
+    drcTheme(axis_title_size = 16, bold_axis_titles = TRUE) +
     ggplot2::ggtitle(title)
 }

@@ -36,7 +36,7 @@ plotDot <- function(ic50_df, title = "",units = "nM", colors = NULL) {
     ) +
     ggplot2::scale_y_continuous(name = "IC50 [%s]") +
     ggplot2::scale_x_discrete(name = "") +
-    drc_theme() +
+    drcTheme() +
     ggplot2::theme(
       legend.position = "none",
       axis.text.x     = ggplot2::element_text(angle = 45, hjust = 1)
@@ -94,7 +94,7 @@ plotFeature <- function(ic50_df,
     ggplot2::scale_y_continuous(name = "IC50 [%s]") +
     ggplot2::scale_x_discrete(name = "") +
     ggplot2::scale_linetype_manual(values = ancestry_linetypes) +
-    drc_theme() +
+    drcTheme() +
     ggplot2::theme(
       legend.position = "right",
       axis.text.x     = ggplot2::element_text(angle = 45, hjust = 1)
@@ -148,7 +148,7 @@ plotAnc <- function(ic50_df,
     ggplot2::scale_y_continuous(name = "IC50 [%s]") +
     ggplot2::scale_x_discrete(name = "") +
     ggplot2::scale_color_manual(values = ancestry_colors) +
-    drc_theme() +
+    drcTheme() +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)
     ) +
@@ -198,7 +198,7 @@ plotAUC <- function(auc_df, title = "", ancestry_colors = ANCESTRY_COLORS) {
     ggplot2::scale_y_continuous(name = "AUC (normalized)", limits = c(0, 1)) +
     ggplot2::scale_x_discrete(name = "") +
     ggplot2::scale_color_manual(values = ancestry_colors) +
-    drc_theme() +
+    drcTheme() +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)
     ) +
@@ -302,7 +302,7 @@ plotSensitivity <- function(df,
     ) +
     ggplot2::scale_y_continuous(name = y_label) +
     ggplot2::scale_x_discrete(name = "") +
-    drc_theme() +
+    drcTheme() +
     ggplot2::theme(
       legend.position = "none",
       axis.text.x     = ggplot2::element_text(angle = 45, hjust = 1)

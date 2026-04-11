@@ -22,7 +22,7 @@ genomic feature status.
 
 - Fit 4-parameter log-logistic dose-response models via `drc`
 - Extract IC50, AUC, and Hill slope in a single tidy table
-- Visualize curves stratified by ancestry (HGDP\1KGP superpopulations)
+- Visualize curves stratified by ancestry (HGDP+1KGP superpopulations)
 - Facet by any genomic feature — translocation, driver mutation, CNV
   status
 - Compare sensitivity across groups with built-in ANOVA and Wilcoxon
@@ -45,16 +45,16 @@ library(pgxR)
 data(pgxr_example)
 
 # aggregate replicates
-agg <- combine_reps(pgxr_example)
+agg <- combineReps(pgxr_example)
 
 # fit dose-response models
-fits <- fit_all(agg, unique(agg$cell_line))
+fits <- fitALL(agg, unique(agg$cell_line))
 
 # generate smooth predictions
-preds <- predict_drc(fits, agg)
+preds <- predictDRC(fits, agg)
 
 # extract all metrics in one table
-metrics <- summarize_drc(fits, agg, preds)
+metrics <- summarizeDRC(fits, agg, preds)
 #> 
 #> Estimated effective doses
 #> 
@@ -98,10 +98,10 @@ metrics <- summarize_drc(fits, agg, preds)
 metrics
 #>   cell_line ancestry  feature       IC50 IC50_lower IC50_upper       AUC
 #> 1      pLC1      AFR  NF1-del   3.536447   2.589674   4.483219 0.5920703
-#> 2      pLC2      AFR KRAS-mut 152.766177  40.625936 264.906418 0.1257630
+#> 2      pLC2      AFR KRAS-mut 152.766177  40.625935 264.906418 0.1257630
 #> 3      pLC3      EUR  NF1-del   5.958059   5.693701   6.222418 0.5333453
 #> 4      pLC4      EUR TP53-mut  19.580997  15.971253  23.190741 0.3234936
-#> 5      pLC5      EAS TP53-mut  16.196019  11.350596  21.041442 0.3574289
+#> 5      pLC5      EAS TP53-mut  16.196019  11.350597  21.041442 0.3574289
 #> 6      pLC6      EAS KRAS-mut  82.993387  74.128870  91.857905 0.1443219
 #> 7      pLC7      AMR       WT  35.081798  30.812033  39.351564 0.2848864
 #> 8      pLC8      AMR       WT  42.681382  38.922816  46.439947 0.2593990
@@ -120,14 +120,14 @@ metrics
 
 ``` r
 # dose-response curves by ancestry, faceted by genomic feature
-plot_drc_anc(agg, preds, title = "Paclitaxel Response by Ancestry")
+plotDRCAnc(agg, preds, title = "Paclitaxel Response by Ancestry")
 ```
 
 <img src="man/figures/README-plot-drc-1.png" alt="" width="100%" />
 
 ``` r
 # IC50 comparison across ancestry groups with p-values
-plot_sensitivity(metrics, group_col = "ancestry", metric = "IC50",
+plotSensitivity(metrics, group_col = "ancestry", metric = "IC50",
                  title = "Paclitaxel IC50 by Ancestry")
 ```
 
@@ -139,13 +139,18 @@ pgxR expects columns `dose`, `response`, `cell_line`, `ancestry`, and
 `feature`. If your CSV uses different names, use `col_map`:
 
 ``` r
-raw <- load_data(
+raw <- loadData(
   "my_data.csv",
   col_map = list(feature = "translocation")
 )
 
-# standardize ancestry labels to 1KGP/HGDP abbreviations
-raw$ancestry <- standardize_ancestry(as.character(raw$ancestry))
+# if your replicates are tracked in a column other than the default,
+# specify it with replicate_col
+agg <- combineReps(raw, replicate_col = "experiment")
+
+# standardize ancestry labels to HGDP+1KGP abbreviations
+raw$ancestry <- standardizeAncestry(as.character(raw$ancestry))
+
 ```
 
 ## Citation

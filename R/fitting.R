@@ -17,7 +17,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' agg  <- combineReps(load_data("data.csv"))
+#' agg  <- combineReps(loadData("data.csv"))
 #' fit  <- fitCL(agg, "SKMM-1")
 #' }
 fitCL <- function(data, cell_line_name, model = drc::LL.4()) {
@@ -52,7 +52,7 @@ fitCL <- function(data, cell_line_name, model = drc::LL.4()) {
 #'
 #' @examples
 #' \dontrun{
-#' agg  <- combineReps(load_data("data.csv"))
+#' agg  <- combineReps(loadData("data.csv"))
 #' fits <- fitALL(agg, unique(agg$cell_line))
 #' }
 fitALL <- function(data, cell_lines, model = drc::LL.4()) {
