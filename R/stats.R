@@ -60,7 +60,7 @@ runAOV <- function(metrics_df, group_col, metric = "IC50") {
 #' testGroups(metrics, group_col = "feature", metric = "AUC")
 #' }
 testGroups <- function(metrics_df, group_col, metric = "IC50") {
-  validate_columns(metrics_df, c(group_col, metric))
+  validateCols(metrics_df, c(group_col, metric))
   
   groups <- unique(metrics_df[[group_col]])
   if (length(groups) != 2) {
