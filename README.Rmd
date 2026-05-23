@@ -93,14 +93,6 @@ raw$ancestry <- standardizeAncestry(as.character(raw$ancestry))
 
 ```
 
-## Citation
-
-If you use pgxR in your research please cite:
-
-> Hooker Q (2026). pgxR: Pharmacogenomics Dose-Response Analysis with
-> Population Context. R package version 0.1.0.
-> https://github.com/iLOVESenescence/pgxR
-
 ## License
 
 GPL (>= 3)
