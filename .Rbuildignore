@@ -18,3 +18,4 @@
 ^data-raw$
 ^README\.Rmd$
 ^\.github$
+^CITATION\.cff$

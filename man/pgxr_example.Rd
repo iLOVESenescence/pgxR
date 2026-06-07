@@ -23,14 +23,14 @@ Synthetically generated via data-raw/pgxr_example.R
 pgxr_example
 }
 \description{
-A synthetic dataset simulating paclitaxel dose-response measurements
-across 8 lung cancer cell lines with varying genomic backgrounds and
-ancestry groups. Generated using 4-parameter log-logistic (LL.4) curves
-with added gaussian noise, reflecting known paclitaxel biology:
-NF1-deleted lines are sensitized, KRAS-mutant lines are resistant.
+A synthetic dataset for illustrating pgxR functionality. Dose-response
+parameters were chosen to reflect the range of paclitaxel sensitivity
+observed in human lung cancer cell lines (Georgiadis et al., 1997).
+Ancestry and genomic features included to highlight faceting parameters.
 }
 \references{
-Tomas M, et al. (2015). NF1 inactivation and paclitaxel sensitivity.
-KRAS mutations and taxane resistance in NSCLC.
+Georgiadis MS, Russell EK, Gazdar AF, Johnson BE. Paclitaxel cytotoxicity
+against human lung cancer cell lines increases with prolonged exposure
+durations. \emph{Clin Cancer Res.} 1997;3(3):449-454. PMID: 9815704.
 }
 \keyword{datasets}
