@@ -34,7 +34,7 @@ plotDot <- function(ic50_df, title = "",units = "nM", colors = NULL) {
       ggplot2::aes(ymin = Lower, ymax = Upper),
       width = 0.2, alpha = 0.8
     ) +
-    ggplot2::scale_y_continuous(name = "IC50 [%s]") +
+    ggplot2::scale_y_continuous(name = sprintf("IC50 [%s]", units)) +
     ggplot2::scale_x_discrete(name = "") +
     drcTheme() +
     ggplot2::theme(
@@ -91,7 +91,7 @@ plotFeature <- function(ic50_df,
       width = 0.2, alpha = 0.8
     ) +
     ggplot2::facet_wrap(~feature) +
-    ggplot2::scale_y_continuous(name = "IC50 [%s]") +
+    ggplot2::scale_y_continuous(name = sprintf( "IC50 [%s]", units)) +
     ggplot2::scale_x_discrete(name = "") +
     ggplot2::scale_linetype_manual(values = ancestry_linetypes) +
     drcTheme() +
@@ -145,7 +145,7 @@ plotAnc <- function(ic50_df,
       ggplot2::aes(ymin = Lower, ymax = Upper),
       width = 0.2, alpha = 0.8
     ) +
-    ggplot2::scale_y_continuous(name = "IC50 [%s]") +
+    ggplot2::scale_y_continuous(name = sprintf("IC50 [%s]", units)) +
     ggplot2::scale_x_discrete(name = "") +
     ggplot2::scale_color_manual(values = ancestry_colors) +
     drcTheme() +

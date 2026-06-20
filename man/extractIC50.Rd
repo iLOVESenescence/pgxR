@@ -20,6 +20,6 @@ A one-row data frame with columns \code{Estimate}, \code{SE}, \code{Lower},
 \code{Upper}, \code{cell_line}, \code{ancestry}, \code{feature}.
 }
 \description{
-Uses \code{\link[drc:ED.drc]{drc::ED()}} with delta-method confidence intervals to estimate the
+Uses \code{\link[drc:ED]{drc::ED()}} with delta-method confidence intervals to estimate the
 dose producing 50\% effect.
 }
